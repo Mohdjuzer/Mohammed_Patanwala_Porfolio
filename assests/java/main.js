@@ -38,7 +38,37 @@ let swiper = new Swiper(".projects__container", {
     
       },
 });
-
+document.addEventListener('DOMContentLoaded', function() {
+    const portSwiper = new Swiper('.port__swiper', {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        loop: true,
+        grabCursor: true,
+        centeredSlides: true,
+        
+        navigation: {
+            nextEl: '.port__swiper .swiper-button-next',
+            prevEl: '.port__swiper .swiper-button-prev',
+        },
+        
+        pagination: {
+            el: '.port__swiper .swiper-pagination',
+            clickable: true,
+            dynamicBullets: true,
+        },
+        
+        breakpoints: {
+            768: {
+                slidesPerView: 1,
+                spaceBetween: 30,
+            },
+            968: {
+                slidesPerView: 1,
+                spaceBetween: 30,
+            },
+        },
+    });
+});
 //swiper testimonial
 let swiperTestimonial = new Swiper(".testimonial__container", {
   grabCursor:true,
@@ -121,16 +151,21 @@ const selectedIcon=localStorage.getItem('selected-icon')
 
 const getCurrentTheme=()=>document.body.classList.contains(darkTheme)?'dark':'light'
 const getCurrentItem=()=>themeButton.classList.contains(iconTheme)?'ri-moon-line' : 'ri-sun-line'
+
 if(selectedTheme){
   document.body.classList[selectedTheme==='dark'?'add':'remove'](darkTheme)
   themeButton.classList[selectedIcon==='ri-moon-line'?'add':'remove'](iconTheme)
+}else{
+  document.body.classList.add(darkTheme)
+  themeButton.classList.add(iconTheme)
 }
+
 themeButton.addEventListener('click',()=>{
   document.body.classList.toggle(darkTheme)
   themeButton.classList.toggle(iconTheme)
 
   localStorage.setItem('selected-theme',getCurrentTheme())
-  localStorage.setItem('selected-item',getCurrentItem())
+  localStorage.setItem('selected-icon',getCurrentItem())
 })
 //change background header
 const scrollHeader =() =>{
